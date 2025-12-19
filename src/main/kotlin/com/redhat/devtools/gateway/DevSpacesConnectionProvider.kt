@@ -111,6 +111,8 @@ class DevSpacesConnectionProvider : GatewayConnectionProvider {
                             )
                         }
                         cont.resume(null)
+                    } finally {
+                        indicator.dispose()
                     }
                 },
                 "Connecting to Remote IDE...",
