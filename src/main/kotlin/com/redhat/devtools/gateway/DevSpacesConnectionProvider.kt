@@ -202,17 +202,8 @@ class DevSpacesConnectionProvider : GatewayConnectionProvider {
         indicator.update(message = "Establishing remote IDE connection…")
         val thinClient = DevSpacesConnection(ctx)
             .connect({}, {}, {},
-                onProgress = { value: Any ->
-                    when (val v = value) {
-                        is String -> {
-                            if (!v.isEmpty()) {
-                                indicator.text2 = v
-                            }
-                        }
-                        is ProgressCountdown.ProgressEvent -> {
-                            indicator.update(value.title, value.message, value.countdownSeconds)
-                        }
-                    }
+                onProgress = { value ->
+                    indicator.update(value.title, value.message, value.countdownSeconds)
                 },
                 checkCancelled = {
                     if (indicator.isCanceled) throw CancellationException("User cancelled the operation")

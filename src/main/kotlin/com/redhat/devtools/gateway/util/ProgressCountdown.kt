@@ -58,11 +58,6 @@ class ProgressCountdown(private val delegate: ProgressIndicator) : ProgressIndic
         delegate.text2 = baseText2
     }
 
-    fun dispose() {
-        stopCountdown()
-        scope.cancel()
-    }
-
     private fun buildText2WithSuffix(secondsLeft: Long): String =
         buildString {
             baseText2?.let { append(it) }
